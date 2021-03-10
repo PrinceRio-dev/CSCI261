@@ -1,0 +1,104 @@
+COURSE:         CSCI 261
+EXAM:           Midterm Fall 2020 
+INSTRUCTOR:     Dr. P. Walsh
+DURATION:       120  minutes
+INSTRUCTIONS    This exam consists of 4 questions. 
+
+Answer all questions (max 40 points).
+You must show all you work.
+
+This is an open-book test.  You are allowed to use your computer,
+otter/cubs and the Internet but your answers must be your own (you can
+not ask or  take advise/solutions from someone else).
+
+All questions relate to material covered in-class or in the lab. All
+conventions discussed in-class must be followed.
+
+Question 1 (10 points):
+-----------------------
+(a) Which of the  following statements are true and which are false.
+
+1. The SSBC is an 8 bit computer.
+
+2. Computer architecture refers to attributes visible to the programmer.
+
+3. The SSBC uses Little-Endian notation to store 16 bit addresses.
+
+(b) Consider the byte 11111110 0b (in binary). What number does the byte
+represent if it is interpreted as a 2's complement number?
+
+(c) What is the difference between an opcode and a mnemonic?
+
+(d) Compare and contrast extended, immediate and inherent mode of
+addressing.
+
+Question 2 (10 points):
+-----------------------
+(a) Develop an SSBC test case (in assembly language) to verify that the
+nor operation does not set the Z flag (0 to 1 transition).
+
+(b) Translating machine language into assembly language is referred to
+as disassembly. Your task is to disassemble the following SSBC machine
+language into SSBC assembly language.
+
+         00000010
+         11111111
+         00000010 
+         00000000
+         00000010 
+         00000000
+         00001000 
+         00000011 
+         11111111
+         11111011
+         00000101 
+         11111111
+         11111100
+         00000001 
+
+Question 3 (10 points):
+-----------------------
+Write an SSBC assembly language program that implements the
+following to specification:
+
+---=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+-- Assumptions
+--   none
+-- Behaviour
+--   main passes a single byte parameter n to the subroutine
+--   the parameter is passed on the stack
+--   the subroutine implements the following  pseudo code
+--      if n==1 then
+--         port A = 2
+--      else
+--         port A = n
+---=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+Question 4 (10 points):
+-----------------------
+Consider the following SSBC assembly language subroutine.
+
+-- =============================Subroutine XX ===========================
+
+-- Assumptions
+--   PSW is saved/restored by the caller
+--   caller places return address on the stack
+--   callee removes return address from the stack
+--
+-- Behaviour
+--   write 1 to port A
+
+XX:   pushimm 1         -- write 1 to A
+      popext A
+      pushimm 0
+      popext PSW        -- clear Z and N
+      -- self modifying code to take care or subroutine return
+      popext XX+17d     -- save high byte of return address
+      popext XX+18d     -- save low byte of return address
+      jnz               -- return
+                                                   
+
+Your task is to translate the assembly language into machine language
+assuming that the subroutine starts (label XX) at memory address 0020 0x
+(hex).
