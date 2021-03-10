@@ -1,0 +1,70 @@
+00000010   pushimm 0
+00000000
+00000101   popext PSW
+11111111
+11111011
+00000011   pushext B
+11111111
+11111101
+00000101   popext a
+00000000
+00000001
+00000010   pushimm 22 RH
+00010110
+00000010   pushimm 0  RL
+00000000
+00000010   pushimm 1  RH1
+00000001
+00000010   pushimm 0  RL1
+00000000
+00000110   jnz XX --line number 29
+00000000
+00011101
+00000011   pushext a --line number 1
+00000000
+00000001
+00000101   popext C
+11111111
+11111110
+00000001   halt ----------------------after this one line, subrotine--------------------------------------------
+00000101   XX: popext 36  which will write RL1 at line number 36
+00000000
+00100100
+00000101   popext 37 which will write RH1 at line number 37
+00000000
+00100101
+00000011   pushext a = RL1 RH1
+00000000
+00000000
+00000010   pushimm 1   --before line 38, stack : *a   RL   RH 
+00000001
+00001000   add  --after line 40, stack : *a1=*a+1,   RL,   RH 
+00000011   pushext 37 , put the RH1 on the stack
+00000000
+00100101
+00000011   pushext 36 , put the RL1 on the stack
+00000000
+00100100
+00000101   popext 54, put the RL1 at line 54
+00000000
+00110110
+00000101   popext 55, put the value RH1 line 55
+00000000
+00110111
+00000101   popext a --take the value from the stack and put it at address a
+00000000   RL1
+00000000   RH1
+00000101   popext 68
+00000000
+01000100
+00000101   popext 69
+00000000
+01000101
+00000010   pushimm 0
+00000000
+00000101   popext PSW
+11111111
+11111011
+00000110   Jnz returnaddress
+00000000   RL
+00000000   RH

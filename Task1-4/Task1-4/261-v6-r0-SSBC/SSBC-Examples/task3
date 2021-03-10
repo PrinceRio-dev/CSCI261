@@ -1,0 +1,57 @@
+--   Author/Date
+--      Princekumar Diyora
+--      05 Nov 2020
+
+--   Assumptions
+--      none
+
+--   Behaviour
+--   main 
+--      Read a value from Port B and store the value
+--      at address a. Invoke the subroutine increment.
+--      To this end, pass address a (big endian) to increment.
+--      The parameter is passed on the stack.
+--      On return from increment, write the value stored at
+--      address a to Port C.
+--   increment
+--      The subroutine implements the following  pseudo code
+--      *a=*a+1 (increment the value referenced by a by 1) 
+
+--------------------------main----------------------------
+
+pushimm 0      --pushin 0 on the stack
+popext PSW     --before starting the program we are clearing the Z flag
+pushext B      --take the value from the port B
+popext a       --it will take the value from the stack and leave that value at address a
+               --address of a will be at line number 1 in our case
+pushimm 22     --pushing the RH on the stack (higher return address)
+pushimm 0      --pushing the RL on the stack  (lower return address)
+pushimm 1      --pushing the RH1 on the stack (higher part of the address a)
+pushimm 0      --pushing the RL1 on the stack (lower part of the address a)
+jnz XX         --if z flag is not zero then jump to given location
+pushext a      --go to the address of a and take the value and put it on the stack
+popext C       --take the value of a from the stack and leave it at port C
+halt           --end of the main routine
+
+---------------------------subroutine------------------------------
+
+XX: popext 36  --this will take the value from the stack which is RL1(lower address of a)
+               --and go to line number 36 and write there
+    popext 37  --this will take the value from the stack which is RH1(higher address of a)
+               --and go to line number 37 and write there
+    pushext a  --go to the address of a and take the value and put it on the stack
+               --the address of a could be anything
+    pushimm 1  --before pushing 1 on the stack our stack looks like *a, RL(lower return address),RH(Higher return address)
+    add        --adding 1 and *a together, so now on stack *a1, RL,RH
+    pushext 37 --it will go to line number 37 and put the RH1 on the stack
+    pushext 36 --it will go to line number 36 and put the RL1 on the stack
+    popext 54  --this will take the value of RL1 and put it at line number 54
+    popext 55  --this will take the value of RH1 and put it at line number 55
+    popext a   --take the value from the stack and put it at address a
+    popext 68  --this will take RL from the stack and leave at line number 68
+    popext 69  --this will take RH from the stack and leave at line number 69
+    pushimm 0  --we need to clear the z flag again
+    popext PSW
+    jnz returnAddress --jump back to the returnaddress
+                      -- and the RL and RH will be zero in the machine code
+    

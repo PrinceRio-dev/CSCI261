@@ -1,0 +1,94 @@
+00000010   pushimm 0
+00000000
+00000101   popext PSW
+11111111
+11111011
+00000010   pushimm 15 --lower return address RL
+00001111
+00000010   pushimm 0  --higher return address RH
+00000000
+00000011   pushext B
+11111111
+11111101
+00000110   jnz f --line number 19
+00000000
+00010011
+00000101   popext A --calling the subroutine
+11111111
+11111100
+00000001   halt ---after this line my subroutine will start-------------
+00000010   pushimm 0  : f ---the base case ----------------
+00000000
+00001000   add 
+00000110   jnz recall(39) --go to line number 39
+00000000
+00100111
+00000101   popext PSW
+11111111
+11111011
+00000101   popext 37   --RH
+00000000
+00100101
+00000101   popext 38   --RL
+00000000
+00100110
+00000010   pushimm 1
+00000001
+00000110   jnz returnAddress
+00000000
+00000000   -----------after this line our recursive call will start----------
+00000101   popext hold(256)  : reacall
+00000001
+00000000  
+00000011   pushext hold(256)
+00000001
+00000000
+00000010   pushimm 63 --RL --go to recursive return
+00111111
+00000010   pushimm 0  --RH
+00000000
+00000010   pushimm 1 
+00000001
+00000011   pushext hold(256)
+00000001
+00000000
+00001001   sub 
+00000010   pushimm 0 --clearing the z and n flag
+00000000
+00000101   popext PSW
+11111111
+11111011
+00000110   jnz f --jump back to start of the subroutine
+00000000
+00010011   ---after this line our recursive return will strat-----------------
+00000101   popext hold(256)  : recret --saving n-1 into temp memory
+00000001
+00000000  
+00000011   pushext hold(256)
+00000001
+00000000
+00000011   pushext hold(256)
+00000001
+00000000
+00001000   add   -- adding f(n-1)+f(n-1)
+00000101   popext hold(256) 
+00000001
+00000000  
+00000010   pushimm 0 --clearing the z and n flag
+00000000
+00000101   popext PSW
+11111111
+11111011
+00000100   popinh
+00000101   popext 92  --RH
+00000000
+01011100   
+00000101   popext 93  --RL
+00000000
+01011101
+00000011   pushext hold(256)
+00000001
+00000000
+00000110   jnz returnAddress
+00000000
+00000000

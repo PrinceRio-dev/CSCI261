@@ -1,0 +1,60 @@
+--   Author/Date
+--      Princekumar Diyora
+--      17 Nov 2020
+
+--   Assumptions
+--      program uses recursion to advantage
+--      n >= 0, n < 5
+
+--   Behaviour
+--      program reads n from port B and writes f(n) to port A where
+--      f(n)=f(n-1) * 2  where n >= 0 and f(0)=1  
+
+-----main routine----------------------------------
+
+pushimm 0       --pushing 0 on the stack
+popext PSW      --clearing the z and n flag
+pushimm 15      --this is the L lower return addresss
+pushimm 0       --this is the H higher return address
+pushext B       --take the parameter n from the port B
+jnz f(19)       --jump to subroutine
+popext A        --writes f(n) to port A, calling the subroutine
+halt            --end of the program
+
+----------subroutine----------------------------------
+---------base case---------------------------------
+f:      pushimm 0       --pushing 0 on the stack
+        add             
+        jnz recall(39)  --if not zero than move to label named recall
+        popext PSW      --clearing z and n flag
+        popext 37       --higher return address RH
+        popext 38       --lower retrun address RL
+        pushimm 1       --pushing one on the stack beacuse if n=0 than it will return 1
+        jnz returnaddress(0)--jump back to main routine
+
+------------recursive call-----------------------------------
+recall: popext hold(256)--save parameter n in temp memory, n was on top of the stack
+        pushext hold(256)--restoring the n on the stack
+        pushimm 63      --lower return address RL, back to recursive return
+        pushimm 0       --higher return adddress RH
+        pushimm 1       --pushing 1 on the stack
+        pushext hold    --take the value from the given address and put it on the stack
+        sub             --here we are doing n-1
+        pushimm 0       --clearing out z and n flag
+        popext PSW     
+        jnz f(19)       --jump to start of the subroutine again
+
+-------------if it is not 0 than recursive return-------------------------------
+recret:    popext hold(256)  --saving n-1 into tmp memory beacuse it is on the stack right now and we want to add
+                            --n-1 by it self
+           pushext hold(256)  --go to address take the value and put it on the stack
+           pushext hold(256)  --go to address is specified and take the value and put it on the stack
+           add                --add the n-1 and n-1 together
+           popext hold(256)   --now saving the n-1 + n-1 into temp memory
+           pushimm 0          --pushing 0 on the stack, clearing out the z and n flag
+           popext PSW  
+           popinh            --take out the value from top of the stack 
+           popext 92         --higher return address RH
+           popext 93         --lower return address RL
+           pushext hold(256)  --go to address is specified take the value and put it on the stack
+           jnz returnaddress(0)--jump back to main routine

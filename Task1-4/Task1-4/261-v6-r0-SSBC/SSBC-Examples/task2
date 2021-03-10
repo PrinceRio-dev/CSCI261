@@ -1,0 +1,42 @@
+--   Author/Date
+--      Princekumar Diyora
+--      28 oct 2020
+
+--   Assumptions
+--      none
+
+--   Behaviour
+--       main reads a value for n from port B
+-- 
+--       the value of n (parameter) is passed to the subroutine on the stack
+--
+--       the subroutine implements the following  pseudo code
+--       port A = 2
+--       if n==0 then
+--         port A = 1
+
+--------------------------main----------------------------
+
+pushimm 0    --setting the z flag to be zero
+popext PSW   --we are doing it beacuse we want to call function
+pushimm 15   --this is the higher return address 15=(RH)
+pushimm 0    --this is the lower return address 0=(RL)
+pushext B    --it will take the parameter from the port B
+JnZ XX       --calling the function
+halt         --end of the main routine
+
+--------------------------subroutine-------------------------
+
+XX: pushimm 2          --push the value 2 on the stack
+    popext A           --this will take that value and put it to the port A
+                       --basically we are assigning A=1
+    pushimm 0          --pushing 0 on the stack
+    Add                --adding with the value which on top of the stack
+                       --checking that is n equal to zero or not
+    popinh             --right now on the stack we have n so we will remove it
+    popext 33          --will go to line number 33 and leave the value there, of RL (lower return address)
+    popext 34          --will go to line number 34 and leave the value there, of RH (higher return address)
+    jnz returnAddress  --will return the address
+    pushimm 1          --if n=0 then push the value 1 on the stack
+    popext A           --will assign the 1 to the port A
+    jnz returnAddress  --it will return address to the the line number 32 
