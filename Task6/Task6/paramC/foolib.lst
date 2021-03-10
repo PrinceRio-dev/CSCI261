@@ -1,0 +1,27 @@
+M68HC11 GAS  foolib.s 			page 1
+
+
+   1                 	;===================
+   2                 	; soft registers
+   3                 	;===================
+   4                 	;.sect page0
+   5                 	;lobal _.d1
+   6                 	;d1: .word
+   7                 	;lobal _.d2
+   8                 	;d2: .word
+   9                 	;lobal _.d3
+  10                 	;d3: .word
+  11                 	;lobal _.tmp
+  12                 	;tmp: .word
+  13                 	;lobal _.z
+  14                 	;z: .word
+  15                 	;lobal _.xy
+  16                 	;xy: .word
+  17                 	
+M68HC11 GAS  foolib.s 			page 2
+
+
+DEFINED SYMBOLS
+            foolib.s:0      .text:0000000000000000 L0F0
+
+NO UNDEFINED SYMBOLS

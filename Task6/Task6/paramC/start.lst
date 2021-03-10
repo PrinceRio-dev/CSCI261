@@ -1,0 +1,51 @@
+M68HC11 GAS  start.s 			page 1
+
+
+   1                 	;============================================-=
+   2                 	; File:
+   3                 	       .file "start.s"
+   4                 	; Behaviour:
+   5                 	;      Initialize SP then call driver
+   6                 	; Assumptions:
+   7                 	;      none
+   8                 	; Board:
+   9                 	;      Sim Gdb
+  10                 	; Author/Date:
+  11                 	;      Peter Walsh Nov 2020
+  12                 	;==========================================-=
+  13                 	
+  14                 	;----------------------------------------
+  15                 	;            Text Section (code and data)
+  16                 	;----------------------------------------
+  17                 	.global _start
+  18                 	.extern driver
+  19                 	.global _.frame
+  20                 	
+  21                 	.sect .page0
+  22                 	_.frame: .word
+  23                 	 
+  24                 	.sect .text
+  25                 	
+  26                 	_start:
+  27 0000 8E 00 00    	          lds #_stack    ; initialize SP
+  28 0003 BD 00 00    	          jsr driver
+  29                 	startX:
+  30 0006 3F          	          swi
+  31                 	
+  32                 	
+M68HC11 GAS  start.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 start.s
+             start.s:0      .text:0000000000000000 L0F0
+             start.s:26     .text:0000000000000000 _start
+             start.s:22     .page0:0000000000000000 _.frame
+             start.s:27     .text:0000000000000000 L0L0
+             start.s:28     .text:0000000000000003 L0L1
+             start.s:29     .text:0000000000000006 startX
+             start.s:30     .text:0000000000000006 L0L2
+
+UNDEFINED SYMBOLS
+_stack
+driver

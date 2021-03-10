@@ -1,0 +1,527 @@
+M68HC11 GAS  driver.s 			page 1
+
+
+   1                 	;;;-----------------------------------------
+   2                 	;;; Start MC68HC11 gcc assembly output
+   3                 	;;; gcc compiler 3.3.6-m68hc1x-20060122
+   4                 	;;; Command:	/usr/lib/gcc-lib/m68hc11/3.3.6-m68hc1x-20060122/cc1 -quiet -D__GNUC__=3 -D__GNUC_MINOR
+   5                 	;;; Compiled:	Sun Dec 13 18:13:39 2020
+   6                 	;;; (META)compiled by GNU C version 6.3.0 20170221.
+   7                 	;;;-----------------------------------------
+   8                 		.file	"driver.c"
+   9                 		.mode mshort
+  10                 		.section	.debug_abbrev,"",@progbits
+  11                 	.Ldebug_abbrev0:
+  12                 		.section	.debug_info,"",@progbits
+  13                 	.Ldebug_info0:
+  14                 		.section	.debug_line,"",@progbits
+  15                 	.Ldebug_line0:
+  16                 		.sect	.text
+  17                 	.Ltext0:
+  18                 		.globl	sigman
+  19                 		.type	sigman,@function
+  20                 	sigman:
+  21                 	.LFB3:
+  22                 	.LM1:
+  23 0000 DE 00       		ldx	*_.frame
+  24 0002 3C          		pshx
+  25 0003 3C          		pshx
+  26 0004 3C          		pshx
+  27 0005 3C          		pshx
+  28 0006 9F 00       		sts	*_.frame
+  29 0008 DE 00       		ldx	*_.frame
+  30 000a ED 01       		std	1,x
+  31                 	.LM2:
+  32                 	.LBB2:
+  33 000c 4F          		clra
+  34 000d 5F          		clrb
+  35 000e DE 00       		ldx	*_.frame
+  36 0010 ED 03       		std	3,x
+  37                 	.LM3:
+  38 0012 4F          		clra
+  39 0013 5F          		clrb
+  40 0014 DE 00       		ldx	*_.frame
+  41 0016 ED 05       		std	5,x
+  42                 	.L2:
+  43 0018 DE 00       		ldx	*_.frame
+  44 001a EC 05       		ldd	5,x
+  45 001c DE 00       		ldx	*_.frame
+  46 001e 1A A3 01    		cpd	1,x
+  47 0021 2F 02       		ble	.L5
+  48 0023 20 19       		bra	.L3
+  49                 	.L5:
+  50                 	.LM4:
+  51 0025 DE 00       		ldx	*_.frame
+  52 0027 EC 03       		ldd	3,x
+  53 0029 DE 00       		ldx	*_.frame
+  54 002b E3 05       		addd	5,x
+  55 002d DE 00       		ldx	*_.frame
+  56 002f ED 03       		std	3,x
+  57                 	.LM5:
+M68HC11 GAS  driver.s 			page 2
+
+
+  58 0031 DE 00       		ldx	*_.frame
+  59 0033 EC 05       		ldd	5,x
+  60 0035 C3 00 01    		addd	#1
+  61 0038 DE 00       		ldx	*_.frame
+  62 003a ED 05       		std	5,x
+  63 003c 20 DA       		bra	.L2
+  64                 	.L3:
+  65                 	.LM6:
+  66 003e DE 00       		ldx	*_.frame
+  67 0040 EC 03       		ldd	3,x
+  68                 	.LM7:
+  69 0042 38          		pulx
+  70 0043 38          		pulx
+  71 0044 38          		pulx
+  72 0045 38          		pulx
+  73 0046 DF 00       		stx	*_.frame
+  74 0048 39          		rts
+  75                 	.LBE2:
+  76                 	.LFE3:
+  77                 		.size	sigman, .-sigman
+  78                 		.globl	driver
+  79                 		.type	driver,@function
+  80                 	driver:
+  81                 	.LFB5:
+  82                 	.LM8:
+  83 0049 DE 00       		ldx	*_.frame
+  84 004b 3C          		pshx
+  85 004c 3C          		pshx
+  86 004d 9F 00       		sts	*_.frame
+  87 004f DE 00       		ldx	*_.frame
+  88 0051 ED 01       		std	1,x
+  89                 	.LM9:
+  90 0053 DE 00       		ldx	*_.frame
+  91 0055 EC 01       		ldd	1,x
+  92 0057 8D A7       		bsr	sigman
+  93                 	.LM10:
+  94 0059 38          		pulx
+  95 005a 38          		pulx
+  96 005b DF 00       		stx	*_.frame
+  97 005d 39          		rts
+  98                 	.LFE5:
+  99                 		.size	driver, .-driver
+ 100                 	.Letext0:
+ 101                 		.section	.debug_line
+ 102 0000 00 00 00 7C 		.4byte	.LELT0-.LSLT0
+ 103                 	.LSLT0:
+ 104 0004 00 02       		.2byte	0x2
+ 105 0006 00 00 00 1C 		.4byte	.LELTP0-.LASLTP0
+ 106                 	.LASLTP0:
+ 107 000a 01          		.byte	0x1
+ 108 000b 01          		.byte	0x1
+ 109 000c F6          		.byte	0xf6
+ 110 000d F5          		.byte	0xf5
+ 111 000e 0A          		.byte	0xa
+ 112 000f 00          		.byte	0x0
+ 113 0010 01          		.byte	0x1
+ 114 0011 01          		.byte	0x1
+M68HC11 GAS  driver.s 			page 3
+
+
+ 115 0012 01          		.byte	0x1
+ 116 0013 01          		.byte	0x1
+ 117 0014 00          		.byte	0x0
+ 118 0015 00          		.byte	0x0
+ 119 0016 00          		.byte	0x0
+ 120 0017 01          		.byte	0x1
+ 121 0018 00          		.byte	0x0
+ 122 0019 64 72 69 76 		.string	"driver.c"
+ 122      65 72 2E 63 
+ 122      00 
+ 123 0022 00          		.uleb128 0x0
+ 124 0023 00          		.uleb128 0x0
+ 125 0024 00          		.uleb128 0x0
+ 126 0025 00          		.byte	0x0
+ 127                 	.LELTP0:
+ 128 0026 00          		.byte	0x0
+ 129 0027 05          		.uleb128 0x5
+ 130 0028 02          		.byte	0x2
+ 131 0029 00 00 00 00 		.4byte	.LM1
+ 132 002d 17          		.byte	0x17
+ 133 002e 00          		.byte	0x0
+ 134 002f 05          		.uleb128 0x5
+ 135 0030 02          		.byte	0x2
+ 136 0031 00 00 00 00 		.4byte	.LM2
+ 137 0035 17          		.byte	0x17
+ 138 0036 00          		.byte	0x0
+ 139 0037 05          		.uleb128 0x5
+ 140 0038 02          		.byte	0x2
+ 141 0039 00 00 00 00 		.4byte	.LM3
+ 142 003d 15          		.byte	0x15
+ 143 003e 00          		.byte	0x0
+ 144 003f 05          		.uleb128 0x5
+ 145 0040 02          		.byte	0x2
+ 146 0041 00 00 00 00 		.4byte	.LM4
+ 147 0045 15          		.byte	0x15
+ 148 0046 00          		.byte	0x0
+ 149 0047 05          		.uleb128 0x5
+ 150 0048 02          		.byte	0x2
+ 151 0049 00 00 00 00 		.4byte	.LM5
+ 152 004d 13          		.byte	0x13
+ 153 004e 00          		.byte	0x0
+ 154 004f 05          		.uleb128 0x5
+ 155 0050 02          		.byte	0x2
+ 156 0051 00 00 00 00 		.4byte	.LM6
+ 157 0055 17          		.byte	0x17
+ 158 0056 00          		.byte	0x0
+ 159 0057 05          		.uleb128 0x5
+ 160 0058 02          		.byte	0x2
+ 161 0059 00 00 00 00 		.4byte	.LM7
+ 162 005d 15          		.byte	0x15
+ 163 005e 00          		.byte	0x0
+ 164 005f 05          		.uleb128 0x5
+ 165 0060 02          		.byte	0x2
+ 166 0061 00 00 00 00 		.4byte	.LM8
+ 167 0065 16          		.byte	0x16
+ 168 0066 00          		.byte	0x0
+ 169 0067 05          		.uleb128 0x5
+M68HC11 GAS  driver.s 			page 4
+
+
+ 170 0068 02          		.byte	0x2
+ 171 0069 00 00 00 00 		.4byte	.LM9
+ 172 006d 16          		.byte	0x16
+ 173 006e 00          		.byte	0x0
+ 174 006f 05          		.uleb128 0x5
+ 175 0070 02          		.byte	0x2
+ 176 0071 00 00 00 00 		.4byte	.LM10
+ 177 0075 15          		.byte	0x15
+ 178 0076 00          		.byte	0x0
+ 179 0077 05          		.uleb128 0x5
+ 180 0078 02          		.byte	0x2
+ 181 0079 00 00 00 00 		.4byte	.Letext0
+ 182 007d 00          		.byte	0x0
+ 183 007e 01          		.uleb128 0x1
+ 184 007f 01          		.byte	0x1
+ 185                 	.LELT0:
+ 186 0080 00 00 00 19 		.section	.debug_info
+ 186      00 02 00 00 
+ 186      00 13 01 01 
+ 186      FB 0E 0D 00 
+ 186      01 01 01 01 
+ 187 0000 00 00 00 EA 		.4byte	0xea
+ 188 0004 00 02       		.2byte	0x2
+ 189 0006 00 00 00 00 		.4byte	.Ldebug_abbrev0
+ 190 000a 04          		.byte	0x4
+ 191 000b 01          		.uleb128 0x1
+ 192 000c 00 00 00 00 		.4byte	.Ldebug_line0
+ 193 0010 00 00 00 00 		.4byte	.Letext0
+ 194 0014 00 00 00 00 		.4byte	.Ltext0
+ 195 0018 64 72 69 76 		.string	"driver.c"
+ 195      65 72 2E 63 
+ 195      00 
+ 196 0021 2F 68 6F 6D 		.string	"/home/student/diyorapr/csci261/Task6/Task6/sigman16C"
+ 196      65 2F 73 74 
+ 196      75 64 65 6E 
+ 196      74 2F 64 69 
+ 196      79 6F 72 61 
+ 197 0056 47 4E 55 20 		.string	"GNU C 3.3.6-m68hc1x-20060122"
+ 197      43 20 33 2E 
+ 197      33 2E 36 2D 
+ 197      6D 36 38 68 
+ 197      63 31 78 2D 
+ 198 0073 01          		.byte	0x1
+ 199 0074 02          		.uleb128 0x2
+ 200 0075 00 00 00 B9 		.4byte	0xb9
+ 201 0079 01          		.byte	0x1
+ 202 007a 73 69 67 6D 		.string	"sigman"
+ 202      61 6E 00 
+ 203 0081 01          		.byte	0x1
+ 204 0082 04          		.byte	0x4
+ 205 0083 01          		.byte	0x1
+ 206 0084 00 00 00 B9 		.4byte	0xb9
+ 207 0088 00 00 00 00 		.4byte	.LFB3
+ 208 008c 00 00 00 00 		.4byte	.LFE3
+ 209 0090 01          		.byte	0x1
+ 210 0091 59          		.byte	0x59
+ 211 0092 03          		.uleb128 0x3
+M68HC11 GAS  driver.s 			page 5
+
+
+ 212 0093 6E 00       		.string	"n"
+ 213 0095 01          		.byte	0x1
+ 214 0096 04          		.byte	0x4
+ 215 0097 00 00 00 B9 		.4byte	0xb9
+ 216 009b 02          		.byte	0x2
+ 217 009c 91          		.byte	0x91
+ 218 009d 01          		.sleb128 1
+ 219 009e 04          		.uleb128 0x4
+ 220 009f 73 75 6D 00 		.string	"sum"
+ 221 00a3 01          		.byte	0x1
+ 222 00a4 05          		.byte	0x5
+ 223 00a5 00 00 00 B9 		.4byte	0xb9
+ 224 00a9 02          		.byte	0x2
+ 225 00aa 91          		.byte	0x91
+ 226 00ab 03          		.sleb128 3
+ 227 00ac 04          		.uleb128 0x4
+ 228 00ad 69 00       		.string	"i"
+ 229 00af 01          		.byte	0x1
+ 230 00b0 05          		.byte	0x5
+ 231 00b1 00 00 00 B9 		.4byte	0xb9
+ 232 00b5 02          		.byte	0x2
+ 233 00b6 91          		.byte	0x91
+ 234 00b7 05          		.sleb128 5
+ 235 00b8 00          		.byte	0x0
+ 236 00b9 05          		.uleb128 0x5
+ 237 00ba 73 68 6F 72 		.string	"short int"
+ 237      74 20 69 6E 
+ 237      74 00 
+ 238 00c4 02          		.byte	0x2
+ 239 00c5 05          		.byte	0x5
+ 240 00c6 06          		.uleb128 0x6
+ 241 00c7 01          		.byte	0x1
+ 242 00c8 64 72 69 76 		.string	"driver"
+ 242      65 72 00 
+ 243 00cf 01          		.byte	0x1
+ 244 00d0 0E          		.byte	0xe
+ 245 00d1 01          		.byte	0x1
+ 246 00d2 00 00 00 B9 		.4byte	0xb9
+ 247 00d6 00 00 00 00 		.4byte	.LFB5
+ 248 00da 00 00 00 00 		.4byte	.LFE5
+ 249 00de 01          		.byte	0x1
+ 250 00df 59          		.byte	0x59
+ 251 00e0 03          		.uleb128 0x3
+ 252 00e1 6E 00       		.string	"n"
+ 253 00e3 01          		.byte	0x1
+ 254 00e4 0E          		.byte	0xe
+ 255 00e5 00 00 00 B9 		.4byte	0xb9
+ 256 00e9 02          		.byte	0x2
+ 257 00ea 91          		.byte	0x91
+ 258 00eb 01          		.sleb128 1
+ 259 00ec 00          		.byte	0x0
+ 260 00ed 00          		.byte	0x0
+ 261                 		.section	.debug_abbrev
+ 262 0000 01          		.uleb128 0x1
+ 263 0001 11          		.uleb128 0x11
+ 264 0002 01          		.byte	0x1
+ 265 0003 10          		.uleb128 0x10
+M68HC11 GAS  driver.s 			page 6
+
+
+ 266 0004 06          		.uleb128 0x6
+ 267 0005 12          		.uleb128 0x12
+ 268 0006 01          		.uleb128 0x1
+ 269 0007 11          		.uleb128 0x11
+ 270 0008 01          		.uleb128 0x1
+ 271 0009 03          		.uleb128 0x3
+ 272 000a 08          		.uleb128 0x8
+ 273 000b 1B          		.uleb128 0x1b
+ 274 000c 08          		.uleb128 0x8
+ 275 000d 25          		.uleb128 0x25
+ 276 000e 08          		.uleb128 0x8
+ 277 000f 13          		.uleb128 0x13
+ 278 0010 0B          		.uleb128 0xb
+ 279 0011 00          		.byte	0x0
+ 280 0012 00          		.byte	0x0
+ 281 0013 02          		.uleb128 0x2
+ 282 0014 2E          		.uleb128 0x2e
+ 283 0015 01          		.byte	0x1
+ 284 0016 01          		.uleb128 0x1
+ 285 0017 13          		.uleb128 0x13
+ 286 0018 3F          		.uleb128 0x3f
+ 287 0019 0C          		.uleb128 0xc
+ 288 001a 03          		.uleb128 0x3
+ 289 001b 08          		.uleb128 0x8
+ 290 001c 3A          		.uleb128 0x3a
+ 291 001d 0B          		.uleb128 0xb
+ 292 001e 3B          		.uleb128 0x3b
+ 293 001f 0B          		.uleb128 0xb
+ 294 0020 27          		.uleb128 0x27
+ 295 0021 0C          		.uleb128 0xc
+ 296 0022 49          		.uleb128 0x49
+ 297 0023 13          		.uleb128 0x13
+ 298 0024 11          		.uleb128 0x11
+ 299 0025 01          		.uleb128 0x1
+ 300 0026 12          		.uleb128 0x12
+ 301 0027 01          		.uleb128 0x1
+ 302 0028 40          		.uleb128 0x40
+ 303 0029 0A          		.uleb128 0xa
+ 304 002a 00          		.byte	0x0
+ 305 002b 00          		.byte	0x0
+ 306 002c 03          		.uleb128 0x3
+ 307 002d 05          		.uleb128 0x5
+ 308 002e 00          		.byte	0x0
+ 309 002f 03          		.uleb128 0x3
+ 310 0030 08          		.uleb128 0x8
+ 311 0031 3A          		.uleb128 0x3a
+ 312 0032 0B          		.uleb128 0xb
+ 313 0033 3B          		.uleb128 0x3b
+ 314 0034 0B          		.uleb128 0xb
+ 315 0035 49          		.uleb128 0x49
+ 316 0036 13          		.uleb128 0x13
+ 317 0037 02          		.uleb128 0x2
+ 318 0038 0A          		.uleb128 0xa
+ 319 0039 00          		.byte	0x0
+ 320 003a 00          		.byte	0x0
+ 321 003b 04          		.uleb128 0x4
+ 322 003c 34          		.uleb128 0x34
+M68HC11 GAS  driver.s 			page 7
+
+
+ 323 003d 00          		.byte	0x0
+ 324 003e 03          		.uleb128 0x3
+ 325 003f 08          		.uleb128 0x8
+ 326 0040 3A          		.uleb128 0x3a
+ 327 0041 0B          		.uleb128 0xb
+ 328 0042 3B          		.uleb128 0x3b
+ 329 0043 0B          		.uleb128 0xb
+ 330 0044 49          		.uleb128 0x49
+ 331 0045 13          		.uleb128 0x13
+ 332 0046 02          		.uleb128 0x2
+ 333 0047 0A          		.uleb128 0xa
+ 334 0048 00          		.byte	0x0
+ 335 0049 00          		.byte	0x0
+ 336 004a 05          		.uleb128 0x5
+ 337 004b 24          		.uleb128 0x24
+ 338 004c 00          		.byte	0x0
+ 339 004d 03          		.uleb128 0x3
+ 340 004e 08          		.uleb128 0x8
+ 341 004f 0B          		.uleb128 0xb
+ 342 0050 0B          		.uleb128 0xb
+ 343 0051 3E          		.uleb128 0x3e
+ 344 0052 0B          		.uleb128 0xb
+ 345 0053 00          		.byte	0x0
+ 346 0054 00          		.byte	0x0
+ 347 0055 06          		.uleb128 0x6
+ 348 0056 2E          		.uleb128 0x2e
+ 349 0057 01          		.byte	0x1
+ 350 0058 3F          		.uleb128 0x3f
+ 351 0059 0C          		.uleb128 0xc
+ 352 005a 03          		.uleb128 0x3
+ 353 005b 08          		.uleb128 0x8
+ 354 005c 3A          		.uleb128 0x3a
+ 355 005d 0B          		.uleb128 0xb
+ 356 005e 3B          		.uleb128 0x3b
+ 357 005f 0B          		.uleb128 0xb
+ 358 0060 27          		.uleb128 0x27
+ 359 0061 0C          		.uleb128 0xc
+ 360 0062 49          		.uleb128 0x49
+ 361 0063 13          		.uleb128 0x13
+ 362 0064 11          		.uleb128 0x11
+ 363 0065 01          		.uleb128 0x1
+ 364 0066 12          		.uleb128 0x12
+ 365 0067 01          		.uleb128 0x1
+ 366 0068 40          		.uleb128 0x40
+ 367 0069 0A          		.uleb128 0xa
+ 368 006a 00          		.byte	0x0
+ 369 006b 00          		.byte	0x0
+ 370 006c 00          		.byte	0x0
+ 371                 		.section	.debug_pubnames,"",@progbits
+ 372 0000 00 00 00 24 		.4byte	0x24
+ 373 0004 00 02       		.2byte	0x2
+ 374 0006 00 00 00 00 		.4byte	.Ldebug_info0
+ 375 000a 00 00 00 EE 		.4byte	0xee
+ 376 000e 00 00 00 74 		.4byte	0x74
+ 377 0012 73 69 67 6D 		.string	"sigman"
+ 377      61 6E 00 
+ 378 0019 00 00 00 C6 		.4byte	0xc6
+M68HC11 GAS  driver.s 			page 8
+
+
+ 379 001d 64 72 69 76 		.string	"driver"
+ 379      65 72 00 
+ 380 0024 00 00 00 00 		.4byte	0x0
+ 381                 		.section	.debug_aranges,"",@progbits
+ 382 0000 00 00 00 1C 		.4byte	0x1c
+ 383 0004 00 02       		.2byte	0x2
+ 384 0006 00 00 00 00 		.4byte	.Ldebug_info0
+ 385 000a 04          		.byte	0x4
+ 386 000b 00          		.byte	0x0
+ 387 000c 00 00       		.2byte	0x0
+ 388 000e 00 00       		.2byte	0x0
+ 389 0010 00 00 00 00 		.4byte	.Ltext0
+ 390 0014 00 00 00 5E 		.4byte	.Letext0-.Ltext0
+ 391 0018 00 00 00 00 		.4byte	0x0
+ 392 001c 00 00 00 00 		.4byte	0x0
+ 393                 		.ident	"GCC: (GNU) 3.3.6-m68hc1x-20060122"
+M68HC11 GAS  driver.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 driver.c
+            driver.s:0      .text:0000000000000000 L0F0
+            driver.s:20     .text:0000000000000000 sigman
+            driver.s:23     .text:0000000000000000 L0L0
+            driver.s:24     .text:0000000000000002 L0L1
+            driver.s:25     .text:0000000000000003 L0L2
+            driver.s:26     .text:0000000000000004 L0L3
+            driver.s:27     .text:0000000000000005 L0L4
+            driver.s:28     .text:0000000000000006 L0L5
+            driver.s:29     .text:0000000000000008 L0L6
+            driver.s:30     .text:000000000000000a L0L7
+            driver.s:33     .text:000000000000000c L0L8
+            driver.s:34     .text:000000000000000d L0L9
+            driver.s:35     .text:000000000000000e L0L10
+            driver.s:36     .text:0000000000000010 L0L11
+            driver.s:38     .text:0000000000000012 L0L12
+            driver.s:39     .text:0000000000000013 L0L13
+            driver.s:40     .text:0000000000000014 L0L14
+            driver.s:41     .text:0000000000000016 L0L15
+            driver.s:43     .text:0000000000000018 L0L16
+            driver.s:44     .text:000000000000001a L0L17
+            driver.s:45     .text:000000000000001c L0L18
+            driver.s:46     .text:000000000000001e L0L19
+            driver.s:47     .text:0000000000000021 L0L20
+            driver.s:48     .text:0000000000000023 L0L21
+            driver.s:51     .text:0000000000000025 L0L22
+            driver.s:52     .text:0000000000000027 L0L23
+            driver.s:53     .text:0000000000000029 L0L24
+            driver.s:54     .text:000000000000002b L0L25
+            driver.s:55     .text:000000000000002d L0L26
+            driver.s:56     .text:000000000000002f L0L27
+            driver.s:58     .text:0000000000000031 L0L28
+            driver.s:59     .text:0000000000000033 L0L29
+            driver.s:60     .text:0000000000000035 L0L30
+            driver.s:61     .text:0000000000000038 L0L31
+            driver.s:62     .text:000000000000003a L0L32
+            driver.s:63     .text:000000000000003c L0L33
+            driver.s:66     .text:000000000000003e L0L34
+            driver.s:67     .text:0000000000000040 L0L35
+            driver.s:69     .text:0000000000000042 L0L36
+            driver.s:70     .text:0000000000000043 L0L37
+            driver.s:71     .text:0000000000000044 L0L38
+            driver.s:72     .text:0000000000000045 L0L39
+            driver.s:73     .text:0000000000000046 L0L40
+            driver.s:74     .text:0000000000000048 L0L41
+            driver.s:80     .text:0000000000000049 driver
+            driver.s:83     .text:0000000000000049 L0L42
+            driver.s:84     .text:000000000000004b L0L43
+            driver.s:85     .text:000000000000004c L0L44
+            driver.s:86     .text:000000000000004d L0L45
+            driver.s:87     .text:000000000000004f L0L46
+            driver.s:88     .text:0000000000000051 L0L47
+            driver.s:90     .text:0000000000000053 L0L48
+            driver.s:91     .text:0000000000000055 L0L49
+            driver.s:92     .text:0000000000000057 L0L50
+            driver.s:94     .text:0000000000000059 L0L51
+M68HC11 GAS  driver.s 			page 10
+
+
+            driver.s:95     .text:000000000000005a L0L52
+            driver.s:96     .text:000000000000005b L0L53
+            driver.s:97     .text:000000000000005d L0L54
+                    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+                      .debug_line:0000000000000000 .Ldebug_line0
+                            .text:000000000000005e .Letext0
+                            .text:0000000000000000 .Ltext0
+                            .text:0000000000000000 .LFB3
+                            .text:0000000000000049 .LFE3
+                            .text:0000000000000049 .LFB5
+                            .text:000000000000005e .LFE5
+                            .text:0000000000000000 .LM1
+                            .text:000000000000000c .LM2
+                            .text:0000000000000012 .LM3
+                            .text:0000000000000025 .LM4
+                            .text:0000000000000031 .LM5
+                            .text:000000000000003e .LM6
+                            .text:0000000000000042 .LM7
+                            .text:0000000000000049 .LM8
+                            .text:0000000000000053 .LM9
+                            .text:0000000000000059 .LM10
+                      .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+_.frame

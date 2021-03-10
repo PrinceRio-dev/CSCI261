@@ -1,0 +1,49 @@
+include(CewDir/bin/cew.gdb)
+# Cew for asm Testing Script
+# Peter Walsh Mar 2002
+
+#------------ gdb/cew Initialization ---------------
+   #set remotebaud 9600
+   #target buffalo /dev/ttyS0
+   # NOTE... only tested on the simulator
+   # BY DEFAULT
+   target sim
+   load start.elf
+   set language asm
+   cew_Variables
+
+#-------------- Local Constants -------------------
+   set $MAXN=0xC
+
+#-------------- Local Functions -------------------
+# Behaviour:
+#   $ans = sigma($arg0)
+# Assumptions:
+#    $arg0 >= 0
+define oracle
+   set $sum=0
+   set $i=0
+   while ($i <= $arg0)
+      set $sum=$sum+$i
+      set $i++
+   end
+   set $ans=$sum
+end
+
+#---------------- Test Cases -----------------------
+
+tbreak driver
+run
+
+cew_Ncase(set $res=driver(0), $res, 0)
+
+set $cnt=0
+while ($cnt <= $MAXN)
+   oracle $cnt
+   cew_Ncase(set $res=driver($cnt), $res, $ans) 
+   cew_Ncase(set $res=sigman($cnt), $res, $ans) 
+   set $cnt++
+end
+
+cew_Summary
+quit

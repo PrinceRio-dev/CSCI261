@@ -1,0 +1,63 @@
+M68HC11 GAS  foolib.s 			page 1
+
+
+   1                 	.global sigman
+   2                 	;---------------------------------------------
+   3                 	; Behaviour:
+   4                 	;    returns  sigma(n)
+   5                 	; Assumptions:
+   6                 	;    follows the gnu gcc parameter passing convention
+   7                 	; Restriction:
+   8                 	;    subroutine may only accesses registers and the stack
+   9                 	; Register and Memory Usage:
+  10                 	;    Precondition:
+  11                 	;      accb contains the value of n
+  12                 	;    Postcondition:
+  13                 	;      accb contains the returned value
+  14                 	;    Destroys:
+  15                 	;      acca accb
+  16                 	;---------------------------------------------
+  17                 	
+  18                 	sigman:
+  19 0000 07          	      tpa            ; save ccr
+  20 0001 36          	      psha
+  21 0002 4F          	      clra           ; clear partial sum
+  22 0003 5D          	      tstb           ; test for initally n == 0
+  23 0004 27 04       	      beq done
+  24                 	loop:
+  25 0006 1B          	      aba            ; acca:= acca + accb
+  26 0007 5A          	      decb           ; decrement accb
+  27 0008 26 FC       	      bne loop    
+  28                 	
+  29 000a 36          	done: psha           ; place sum in b
+  30 000b 33          	      pulb
+  31                 	
+  32 000c 32          	      pula           ; restore ccr
+  33 000d 06          	      tap
+  34 000e 4F          	      clra
+  35                 	
+  36 000f 39          	      rts
+M68HC11 GAS  foolib.s 			page 2
+
+
+DEFINED SYMBOLS
+            foolib.s:0      .text:0000000000000000 L0F0
+            foolib.s:18     .text:0000000000000000 sigman
+            foolib.s:19     .text:0000000000000000 L0L0
+            foolib.s:20     .text:0000000000000001 L0L1
+            foolib.s:21     .text:0000000000000002 L0L2
+            foolib.s:22     .text:0000000000000003 L0L3
+            foolib.s:23     .text:0000000000000004 L0L4
+            foolib.s:29     .text:000000000000000a done
+            foolib.s:24     .text:0000000000000006 loop
+            foolib.s:25     .text:0000000000000006 L0L5
+            foolib.s:26     .text:0000000000000007 L0L6
+            foolib.s:27     .text:0000000000000008 L0L7
+            foolib.s:29     .text:000000000000000a L0L8
+            foolib.s:30     .text:000000000000000b L0L9
+            foolib.s:32     .text:000000000000000c L0L10
+            foolib.s:33     .text:000000000000000d L0L11
+            foolib.s:34     .text:000000000000000e L0L12
+            foolib.s:36     .text:000000000000000f L0L13
+
+NO UNDEFINED SYMBOLS

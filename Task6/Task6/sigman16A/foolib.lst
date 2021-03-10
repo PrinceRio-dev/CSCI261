@@ -1,0 +1,76 @@
+M68HC11 GAS  foolib.s 			page 1
+
+
+   1                 	.global sigman
+   2                 	;---------------------------------------------
+   3                 	; Author:
+   4                 	;    Princekumar Diyora(diyorapr)
+   5                 	; Behaviour:
+   6                 	;    returns  sigma(n)
+   7                 	; Assumptions:
+   8                 	;    follows the gnu gcc parameter passing convention
+   9                 	; Restriction:
+  10                 	;    subroutine may only accesses registers and the stack
+  11                 	; Register and Memory Usage:
+  12                 	;    Precondition:
+  13                 	;      accd contains the value of n by using index
+  14                 	;      register x and y
+  15                 	;    Postcondition:
+  16                 	;      accd contains the returned value
+  17                 	;    Destroys:
+  18                 	;      clearing the x and y register
+  19                 	;---------------------------------------------
+  20                 	
+  21                 	sigman:
+  22 0000 18 3C       	      pshy         ;pushing index register y on the stack
+  23 0002 3C          	      pshx         ;pushing the index register x on the stack
+  24 0003 CE 00 00    	      ldx #0       ;loading the register x with the value 0
+  25 0006 8F          	      xgdx         ;moving the index register x into the register D
+  26 0007 8C 00 00    	      cpx #0       ;now comparing the index register x with the 0 
+  27                 	                   ;if x==0 then it will execute the next line else
+  28                 	                   ;it will jump to the loop
+  29 000a 27 0D       	      beq done     ;we are making the branch to the done part if the
+  30                 	                   ;z flag is 0
+  31                 	loop:
+  32 000c 3C          	      pshx         ;pushing the index register x on the stack
+  33 000d 18 30       	      tsy          ;transfering from the stack pointer to the 
+  34                 	                   ;index register y
+  35 000f 18 E3 00    	      addd 0,y     ;adding the regiseter d with the location 1000 and the instrution
+  36                 	                   ;and store that result back into the register d
+  37 0012 38          	      pulx         ;pulling the index register x from the stack
+  38 0013 09          	      dex          ;decrementing the index register by one
+  39 0014 8C 00 00    	      cpx #0       ;coparing the index register x, if x==0 then it will execute 
+  40                 	                   ;next line again and if not then skip the next line go to 
+  41                 	                   ;done part
+  42 0017 26 F3       	      bne loop     ;if z is not eual to zero then we are making branch 
+  43                 	                   ;back to the loop
+  44                 	done:            
+  45 0019 38          	      pulx         ;taking out the index register x from the stack
+  46 001a 18 38       	      puly         ;taking out the index register y from the stack
+  47 001c 39          	      rts          ;return from the subroutine
+M68HC11 GAS  foolib.s 			page 2
+
+
+DEFINED SYMBOLS
+            foolib.s:0      .text:0000000000000000 L0F0
+            foolib.s:21     .text:0000000000000000 sigman
+            foolib.s:22     .text:0000000000000000 L0L0
+            foolib.s:23     .text:0000000000000002 L0L1
+            foolib.s:24     .text:0000000000000003 L0L2
+            foolib.s:25     .text:0000000000000006 L0L3
+            foolib.s:26     .text:0000000000000007 L0L4
+            foolib.s:29     .text:000000000000000a L0L5
+            foolib.s:44     .text:0000000000000019 done
+            foolib.s:31     .text:000000000000000c loop
+            foolib.s:32     .text:000000000000000c L0L6
+            foolib.s:33     .text:000000000000000d L0L7
+            foolib.s:35     .text:000000000000000f L0L8
+            foolib.s:37     .text:0000000000000012 L0L9
+            foolib.s:38     .text:0000000000000013 L0L10
+            foolib.s:39     .text:0000000000000014 L0L11
+            foolib.s:42     .text:0000000000000017 L0L12
+            foolib.s:45     .text:0000000000000019 L0L13
+            foolib.s:46     .text:000000000000001a L0L14
+            foolib.s:47     .text:000000000000001c L0L15
+
+NO UNDEFINED SYMBOLS
