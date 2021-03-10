@@ -1,0 +1,89 @@
+COURSE:         CSCI 261
+EXAM:           Final Fall 2020 
+INSTRUCTOR:     Dr. P. Walsh
+DURATION:       120  minutes
+INSTRUCTIONS    This exam consists of 4 questions. 
+
+Answer all questions (max 40 points).
+You must show all you work.
+
+This is an open-book test.  You are allowed to use your computer,
+otter/cubs and the Internet but your answers must be your own (you can
+not ask or  take advise/solutions from someone else).
+
+All questions relate to material covered in-class or in the lab. All
+conventions discussed in-class must be followed.
+
+Question 1 (10 points):
+-----------------------
+(a) Which of the  following statements are true and which are false.
+
+1. The m68hc11 is a 16 bit computer.
+
+2. In the m68hc11, the instruction tsy has a 2 byte opcode
+
+3. In the m68hc11, relative addressing uses two's complement  offsets.
+
+(b) Compare and contrast subroutine call-and-return on the m68hc11 with
+subroutine call-and-return on the SSBC.  You are required to detail the
+stack contents on entry to the subroutine and on exit from the subroutine.
+
+Question 2 (10 points):
+-----------------------
+(a) Develop an SSBC test case (in assembly language) to verify that the
+nor operation does not set the N flag (0 to 1 transition).
+
+(b) Consider the function foo in hc11 assembly language.
+
+   short int foo(short int i, short int j) {
+      return (i+j+3);
+   }
+
+Diagram the stack just before foo's first instruction is executed.
+Clearly indicate the mechanism/convention for parameter passing as
+employed by the GNU C compiler for the m68hc11. Note, you are not
+asked to implement foo.
+
+
+Question 3 (10 points):
+-----------------------
+Implement the following program (in SSBC assembly language) to
+                        ^^^^^^^
+specification as follows:
+
+---=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+-- Assumptions
+--   none
+-- Behaviour
+--   main
+--      Read a value n from Port B and m from Port D.
+--      Invoke the subroutine add2.
+--      To this end, pass n and m to add2 on the stack.
+--      Return n+m from add2.
+--      Write the returned value from add2 to Port C.
+--      No overflow or error checking is performed
+---=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+Question 4 (10 points):
+-----------------------
+In class (video) and Task6, your worked on implementing sigman(n)
+= 0+1+2+..+n.  Now let sigmanm(n, m) = n+n+1+n+2+...+m (n>=0, n<=m).
+For example sigmanm(2, 5) = 2+3+4+5.
+
+Implement the function (subroutine) sigmanm (in m68hc11 assembly language) to
+              ^^^^^^^^
+specification as follows:
+
+unsigned char sigmanm (unsigned char n, unsigned char m) {
+   unsigned char sum, i;
+
+   sum=0;
+   for (i=n; i<=m; i++) {
+      sum=sum+i;
+   }
+   return (sum);
+}
+
+You are required to follow the GNU C compiler for the m68hc11 parameter
+passing convention.  No overflow or error checking is performed.
